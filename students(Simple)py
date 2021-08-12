@@ -1,19 +1,36 @@
 import statistics
 
+
 class Student:
     def __init__(self, name, age, grade):
         self.name = name
         self.age = age
         self.grade = grade
 
-    def get_name(self):
-        return self.name
+    @property
+    def name(self):
+        return self._name
 
-    def get_age(self):
-        return self.age
+    @property
+    def age(self):
+        return self._age
 
-    def get_grade(self):
-        return self.grade
+    @property
+    def grade(self):
+        return self._grade
+
+    @name.setter
+    def name(self, name):
+        self._name = name
+
+    @age.setter
+    def age(self, age):
+        self._age = age
+
+    @grade.setter
+    def grade(self, grade):
+        self._grade = grade
+
 
 class Course:
     def __init__(self, name, max_students):
@@ -24,17 +41,15 @@ class Course:
     def add_student(self, student):
         if len(self.students) < self.max_students:
             self.students.append(student)
-            return True
+            print("Student added successfully")
         else:
-            return False
+            print("Student could not be added")
 
     def get_average_grade(self):
         grades = []
         for student in self.students:
-            grades.append(student.get_grade())
+            grades.append(student.grade)
         return statistics.mean(grades)
-
-
 
 
 if __name__ == "__main__":
